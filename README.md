@@ -18,4 +18,4 @@ Contributor Code of Conduct (CONDUCT.md).
 By contributing to this project,
 you agree to abide by its terms.
 Both of these files can be found in our
-`GitHub repository. <https://github.com/shafayetShafee/zipf.git>`_
+[GitHub repository](https://github.com/shafayetShafee/zipf.git).
