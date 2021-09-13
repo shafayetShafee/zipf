@@ -5,5 +5,6 @@ rank versus its frequency.
 
 ## Contributors
 - Shafayet Khan <shafayetshafee@gmail.com>
-- Candid Pintail
+- Candid Pintail <shafayetshafee@gmail.com>
+
 
