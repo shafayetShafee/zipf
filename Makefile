@@ -3,6 +3,7 @@
 COUNT=bin/countwords.py
 COLLATE=bin/collate.py
 PLOT=bin/plotcounts.py
+PARAMS=bin/plotparams.yml
 BOOK_SUMMARY=bin/book_summary.sh
 DATA=$(wildcard data/*.txt)
 RESULTS=$(patsubst data/%.txt,results/%.csv,$(DATA))
@@ -18,8 +19,8 @@ results : ${RESULTS}
 wordcount_pngs : ${PNGS}
 
 ## results/collated.png : plot the collated results.
-results/collated.png : results/collated.csv
-	python $(PLOT) $< --outfile $@
+results/collated.png : results/collated.csv $(PARAMS)
+	python $(PLOT) $< --outfile $@ --plotparams $(word 2,$^) --style seaborn
 
 ## results/collated.csv : collate all results.
 results/collated.csv : $(RESULTS) $(COLLATE)
@@ -33,9 +34,9 @@ results/%.csv : data/%.txt $(COUNT)
 	python $(COUNT) $< > $@	
 
 ## results/%.png : Regenerate word count plot for any book.
-results/%.png : results/%.csv $(PLOT)
+results/%.png : results/%.csv $(PLOT) $(PARAMS)
 	@mkdir -p results
-	python $(PLOT) $< --outfile $@
+	python $(PLOT) $< --outfile $@ --plotparams $(word 3,$^) --style seaborn
 
 ## clean : remove all generated files.
 clean :
@@ -48,6 +49,7 @@ settings :
 	@echo RESULTS: $(RESULTS)
 	@echo COLLATE: $(COLLATE)
 	@echo PLOT: $(PLOT)
+	@echo PARAMS: $(PARAMS)
 	@echo BOOK_SUMMARY: $(BOOK_SUMMARY)
 
 ## help : show this message.
